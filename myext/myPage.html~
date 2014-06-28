@@ -1,0 +1,56 @@
+<html>
+<title>New Taab</title>
+<head>
+ <link rel="stylesheet" type="text/css" href="mystyle.css">
+<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="store.js"></script>
+ <script  type="text/javascript" src="event.js"></script>
+<script type="text/javascript" src="js/my_js.js"></script>
+</head>
+<body id ="bdy">
+ 
+ <!-- display popup -->
+    <div class="title" id="one">
+		<span></span>
+		<button id = "popup" class="qwerty">Enter Name</button>
+	</div>
+
+<div id="background_cycler" >
+ <img class="active" src="images/a.jpg" alt=""/>
+ <img src="images/b.jpg" alt=""/>
+ <img src="images/c.jpg" alt=""  />
+ <img src="images/d.jpg" alt=""/>		
+ <img src="images/e.jpg" alt=""  />
+</div>
+
+
+
+
+<!-- Popup div starts here -->
+ <div id="popupContact">
+ 
+ <!-- heading of the form -->
+	<div class="head" id="mypopup">
+		<h3>Enter Your Name</h3>
+		<p>This allows the extension to customize your experience</p>
+    </div>
+	
+	<!-- contact us form -->
+		<form>
+		<input type = "text" name="vname" value="Your Name" id="myname"/>
+		
+		<button id="send" class="lolz">Confirm</button>
+		</form>
+ </div> 
+ <!-- Popup div ends here -->
+
+
+
+
+
+
+
+</body>
+
+</html>
+

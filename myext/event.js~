@@ -1,0 +1,95 @@
+$('#background_cycler').hide();//hide the background while the images load, ready to fade in later
+function cycleImages(){
+      var $active = $('#background_cycler .active');
+      var $next = ($('#background_cycler .active').next().length > 0) ? $('#background_cycler .active').next() : $('#background_cycler img:first');
+      $next.css('z-index',2);//move the next image up the pile
+	  $active.fadeOut(1500,function(){//fade out the top image
+	  $active.css('z-index',1).show().removeClass('active');//reset the z-index and unhide the image
+      $next.css('z-index',3).addClass('active');//make the next image the top one
+      });
+    }
+
+    $(window).load(function(){
+		$('#background_cycler').fadeIn(1500);//fade the background back in once all the images are loaded
+		  // run every 2s
+		  setInterval(function(){cycleImages();}, 2000);
+    });
+
+
+
+
+function clickHandler(e) {
+  setTimeout(awesomeTask, 1000);
+	alert('hiii');
+}
+
+function awesomeTask() {
+  div_show();
+  
+}
+
+
+
+
+
+
+
+  
+var w = screen.availWidth;
+var h = screen.availHeight;
+ 
+function div_show(){
+
+var d=document.getElementById('popupContact');
+d.style.display = "block";
+d.style.border = "2px solid rgb(240, 158, 158)";
+d.style.top = 50 + "%";
+d.style.left = 50 + "%";
+
+
+d.style.left = (parseInt(d.style.left)/100)* w + "px";
+d.style.left = (parseInt(d.style.left)-400) + "px";
+d.style.left = (parseInt(d.style.left)/w)*100 + "%";
+
+d.style.top = (parseInt(d.style.top)/100)* h + "px";
+d.style.top = (parseInt(d.style.top)-220) + "px";
+d.style.top = (parseInt(d.style.top)/h)*100 + "%";
+
+
+
+}
+
+
+function myfunc(){
+	
+	$('#one span').text(store.get('name'));
+}
+
+function check(e){ 
+
+var zzz=document.getElementById('myname').value;
+store.set('name',zzz);
+$('#popupContact').hide()
+var lol=store.get('name');
+$('#one span').text(lol);
+
+
+var target = (e && e.target) || (event && event.srcElement); 
+
+var obj = document.getElementById('popupContact'); 
+var obj2 = document.getElementById('popup'); 
+
+checkParent(target)?obj.style.display='none':null; 
+target==obj2?obj.style.display='block':null; 
+} 
+
+function checkParent(t){ 
+
+while(t.parentNode){ 
+if(t==document.getElementById('popupContact')){ 
+return false 
+} 
+t=t.parentNode 
+} 
+return true 
+} 

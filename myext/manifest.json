@@ -1,0 +1,31 @@
+{
+  "manifest_version": 2,
+
+  "name": "My Extension",
+  "version": "2.0",
+  "description": "My extension to override default new tab",
+  
+  "browser_action": {
+    "default_icon": "icon19.png"
+  },
+
+"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+
+
+  
+ "chrome_url_overrides" : {
+    "newtab": "myPage.html"
+  },
+
+"content_scripts":[
+    {
+        "matches": ["http://mail.google.com/*", "https://mail.google.com/*"],
+        "css" : ["mystyle.css"],
+        "js" : ["jquery-1.11.1.min.js", "store.js"]
+    }
+  ],
+
+
+
+  "permissions": ["<all_urls>"]
+}
