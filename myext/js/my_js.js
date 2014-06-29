@@ -23,15 +23,52 @@ d.style.top = (parseInt(d.style.top)/h)*100 + "%";
 
 }
 
+function displayTime() {
+    var str = "";
+
+    var currentTime = new Date()
+    var hours = currentTime.getHours()
+    var minutes = currentTime.getMinutes()
+    var seconds = currentTime.getSeconds()
+
+    if (minutes < 10) {
+        minutes = "0" + minutes
+    }
+    if (seconds < 10) {
+        seconds = "0" + seconds
+    }
+    var ampm = hours >= 12 ? 'pm' : 'am';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  var str = hours + ':' + minutes +':'+seconds +' '+ ampm;
+   /* str += hours + ":" + minutes + ":" + seconds + " ";
+    if(hours > 11){
+        str += "PM"
+    } else {
+        str += "AM"
+    }*/
+    return str;
+}
+
 function startTime() {
-    var today=new Date();
-    var h=today.getHours();
-    var m=today.getMinutes();
-    var s=today.getSeconds();
-    m = checkTime(m);
-    s = checkTime(s);
-    $('#timediv span').text(h+":"+m+":"+s);
+
+    var opop=displayTime();
+    $('#timediv span').text(opop);
     var t = setTimeout(function(){startTime()},500);
+
+}
+function startgreeting() {
+
+    var opop=getgreeting();
+    $('#one span').text(opop);
+    var t = setTimeout(function(){startgreeting()},500);
+
+}
+function startdate() {
+
+    var opop=mydate();
+    $('#datediv span').text(opop);
+    var t = setTimeout(function(){startdate()},500);
 }
 
 function checkTime(i) {
@@ -40,21 +77,90 @@ function checkTime(i) {
 }
 
 
-function myfunc(){
-	
-	$('#one span').text(store.get('name'));
-	startTime();
 
-		
-	
+function mydate(){
+	var m_names = new Array("January", "February", "March","April", "May", "June", "July", "August", "September", "October", "November", "December");
+var datesuffix="th";
+var d = new Date();
+var curr_date = d.getDate();
+if(curr_date%10==1){
+	datesuffix="st";
+}
+if(curr_date%10==2){
+	datesuffix="nd";
+}
+if(curr_date%10==3){
+	datesuffix="rd";
+}
+if(curr_date>=11 && curr_date<=13){
+	datesuffix="th";
+}
+var curr_month = d.getMonth();
+var curr_year = d.getFullYear();
+str=curr_date +datesuffix+" "+ m_names[curr_month] +" "+ curr_year;
+    return str;
 }
 
+function myfunc(){
+	startgreeting();
+	/*var greeting=getgreeting();
+  var usr=store.get('name');
+  var myfinalstringz=greeting+" "+usr
+	$('#one span').text(myfinalstringz);*/
+	startTime();
+	startdate();
+	/*var qwqw=mydate();
+    $('#datediv span').text(qwqw);*/
+}
+function getgreeting () {
+	var str = "";
+var greeting="default"
+    var currentTimez = new Date();
+    var hoursz = currentTimez.getHours();
+    var minutesz = currentTimez.getMinutes();
+    var secondsz = currentTimez.getSeconds();
+
+    if (minutesz < 10) {
+        minutesz = "0" + minutesz
+    }
+    if (secondsz < 10) {
+        secondsz = "0" + secondsz
+    }
+   if (hoursz < 10) {
+        hoursz = "0" + hoursz
+    }
+  
+  var str = hoursz + ':' + minutesz +':'+secondsz;
+  
+  if (str>'03:59:59' && str<'12:00:00') {
+  	//alert('gm');
+  	greeting="Good Morning"
+  }
+  if (str>='12:00:00' && str<'17:00:00') {
+  	//alert('gm');
+  	greeting="Good Afternoon"
+  }
+  if (str>='17:00:00' && str<'21:00:00') {
+  	//alert('gm');
+  	greeting="Good Evening"
+  }
+  if (str>='21:00:00' && str<='24:00:00' || str>='00:00:00' && str<'04:00:00') {
+  	//alert('gm');
+  	greeting="Good Night"
+  }
+  //var cc = setTimeout(function(){getgreeting()},500);
+  var usr=store.get('name');
+  greeting=greeting+" "+usr
+  return greeting;
+}
 function check(e){ 
 
 var zzz=document.getElementById('myname').value;
 store.set('name',zzz);
-$('#popupContact').hide()
-$('#one span').text(store.get('name'));
+$('#popupContact').hide();
+	var greeting=getgreeting();
+  
+  $('#one span').text(myfinalstringz);
 
 
 var target = (e && e.target) || (event && event.srcElement); 
@@ -92,12 +198,13 @@ function clickHandlerzz(e) {
   div_show();
 }
 
-
-
-
+function myappbuttonfunc (e) {
+  chrome.tabs.update({url:'chrome://apps/'});
+}
 
 document.addEventListener('DOMContentLoaded', function () {
   document.querySelector('.qwerty').addEventListener('click',clickHandlerzz);
   document.querySelector('.lolz').addEventListener('click',clickHandler);
   document.getElementById('bdy').onload=myfunc();
+  document.getElementById('appbutton').addEventListener('click',myappbuttonfunc);
 });
