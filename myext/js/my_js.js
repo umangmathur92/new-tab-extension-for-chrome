@@ -201,10 +201,52 @@ function clickHandlerzz(e) {
 function myappbuttonfunc (e) {
   chrome.tabs.update({url:'chrome://apps/'});
 }
+function myweatherfunc(){
+  
+  $.simpleWeather({
+    location: 'Pune, India',
+    woeid: '',
+    unit: 'c',
+    success: function(weather) {
+      html = '<p>'+weather.temp+'&deg;'+weather.units.temp+' '+weather.currently+'</p>'+'<img src='+'"'+weather.image+'">';
+  
+      $("#weather").html(html);
+    },
+    error: function(error) {
+      $("#weather").html('<p>'+error+'</p>');
+    }
+  });
 
-document.addEventListener('DOMContentLoaded', function () {
+}
+
+function myfeedfunc (e) {
+new FEEDZILLA.Widget({
+  style: 'slide-top-to-bottom',
+  culture_code: 'en_in',
+  c: '989',
+  sc: '-',
+  title: 'Top News',
+  caption: 'All',
+  order: 'relevance',
+  count: '20',
+  w: '250',
+  h: '300',
+  timestamp: 'true',
+  scrollbar: 'false',
+  theme: 'ui-lightness',
+  className: 'feedzilla-22484916518442333'
+});
+
+}
+
+    document.addEventListener('DOMContentLoaded', function () {
+
   document.querySelector('.qwerty').addEventListener('click',clickHandlerzz);
   document.querySelector('.lolz').addEventListener('click',clickHandler);
   document.getElementById('bdy').onload=myfunc();
+  document.getElementById('weather').onload=myweatherfunc();
+myfeedfunc();
+//myfeedfunc();
   document.getElementById('appbutton').addEventListener('click',myappbuttonfunc);
 });
+

@@ -9,7 +9,7 @@
     "default_icon": "icon19.png"
   },
 
-"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+"content_security_policy": "script-src 'self' 'unsafe-eval' https://query.yahooapis.com https://www.google.com ; object-src 'self'",
 
 
   
@@ -19,9 +19,9 @@
 
 "content_scripts":[
     {
-        "matches": ["http://mail.google.com/*", "https://mail.google.com/*"],
+        "matches": ["https://query.yahooapis.com/*","https://www.google.com/*","https://ajax.googleapis.com/*"],
         "css" : ["mystyle.css"],
-        "js" : ["jquery-1.11.1.min.js", "store.js"]
+        "js" : ["jquery-1.11.1.min.js", "store.js","jquery.simpleWeather.min.js","jsapi.js","widget.js"]
     }
   ],
 
